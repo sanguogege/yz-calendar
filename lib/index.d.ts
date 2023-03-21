@@ -1,4 +1,4 @@
-declare const _default: {
+declare const calendar: {
     lYearDays: (y: number) => number;
     leapMonth: (y: number) => number;
     leapDays: (y: number) => number;
@@ -16,4 +16,4 @@ declare const _default: {
     lunar2solar: (y: number, m: number, d: number, isLeapMonth: boolean) => any;
 };
 
-export { _default as default };
+export { calendar as default };

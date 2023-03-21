@@ -7,18 +7,21 @@ import {
     toGanZhi,
     toChinaMonth,
     toChinaDay
-} from "../utils/LunarFunction"
+} from "./LunarFunction"
 
 import {
     toAstro,
     getTerm,
     getAnimal
-} from "../utils/SolarFunction"
+} from "./SolarFunction"
 
 import {
-    Rest,
-    Festival
-} from "../data/Days"
+    RestDay,
+    getGljr,
+    getNljr
+} from "./SetRest"
+
+
 import { nStr1, SolarTerm } from "../data/Calendar";
 
 const solar2lunar = (y: number, m: number, d: number): object => {
@@ -121,19 +124,14 @@ const solar2lunar = (y: number, m: number, d: number): object => {
     let gzD: string = toGanZhi(dayCyclical + d - 1);
     //该日期所属的星座
     let astro: string = toAstro(m, d);
-    // 设置公里节日（后期改为npm）
-    let sFtvSelect: string = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
-    let lFtvSelect: string = (month < 10 ? "0" + month : month.toString()) + (day < 10 ? "0" + day : day.toString());
-    let Gljr: string = "", Nljr: string = "";
-    if (Festival.sFtv[sFtvSelect]) Gljr = Festival.sFtv[sFtvSelect];
-    if (Festival.lFtv[lFtvSelect]) Nljr = Festival.lFtv[lFtvSelect];
-    // 设置法定节假日
-    let Xiu: boolean = false, Ban: boolean = false;
-    let XiuBox = Rest[y];
-    Xiu = XiuBox.xiu.includes(sFtvSelect);
-    Ban = XiuBox.ban.includes(sFtvSelect);
+    // 设置公里节日
+    let Gljr = getGljr(m, d);
+    let Nljr = getNljr(month, day);
+
+    let XiuBox = RestDay(y, m, d)
+
     // 用于设置上个月
-    let DayInfo = { "Xiu": Xiu, "Ban": Ban, "Gljr": Gljr, "Nljr": Nljr, 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? "\u95f0" : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': "\u661f\u671f" + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro };
+    let DayInfo = { "Xiu": XiuBox.Xiu, "Ban": XiuBox.Ban, "Gljr": Gljr, "Nljr": Nljr, 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? "\u95f0" : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': "\u661f\u671f" + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro };
     return DayInfo;
 }
 

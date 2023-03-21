@@ -24,8 +24,7 @@ import {
     lunar2solar
 } from "../utils/Switch"
 
-
-export default {
+const calendar = {
     lYearDays,
     leapMonth,
     leapDays,
@@ -42,3 +41,6 @@ export default {
     solar2lunar,
     lunar2solar
 }
+
+
+export default calendar
