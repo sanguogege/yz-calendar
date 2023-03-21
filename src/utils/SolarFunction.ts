@@ -7,7 +7,7 @@ import { Animals, SolarMonth, TermInfo } from "../data/Calendar"
 * @return Number (-1、28、29、30、31)
 * @eg:var solarMonthDay = calendar.leapDays(1987) ;//solarMonthDay=30//月份参数从1至12，参数错误返回-1
 */
-const solarDays = (y: number, m: number): number => {
+const solarDays = function (y: number, m: number): number  {
     if (m > 12 || m < 1) {
         console.error("月份参数为1至12")
         return -1
@@ -26,7 +26,7 @@ const solarDays = (y: number, m: number): number => {
 * @return Number (-1、28、29、30、31)
 * @eg:var solarFirstWeek = calendar.solarFirstWeek(1987,1) ;//星期四
 */
-const solarFirstWeek = (y: number, m: number): number => {
+const solarFirstWeek = function (y: number, m: number): number  {
     if (m > 12 || m < 1) {
         console.error("月份参数为1至12")
         return -1
@@ -43,7 +43,7 @@ const solarFirstWeek = (y: number, m: number): number => {
  * @param  cDay [description]
  * @return Cn string
  */
-const toAstro = (cMonth: number, cDay: number): string => {
+const toAstro = function (cMonth: number, cDay: number): string  {
     let s: string = "\u9b54\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u9b54\u7faf";
     let arr: number[] = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
     return s.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "\u5ea7";//座
@@ -55,7 +55,7 @@ const toAstro = (cMonth: number, cDay: number): string => {
  * @return day Number
  * @eg:var _24 = calendar.getTerm(1987,3) ;//_24=4;意即1987年2月4日立春
  */
-const getTerm = (y: number, n: number): number => {
+const getTerm = function (y: number, n: number): number  {
     if (y < 1900 || y > 2100) { return -1; }
     if (n < 1 || n > 24) { return -1; }
     let _table: string = TermInfo[y - 1900];
@@ -102,12 +102,12 @@ const getTerm = (y: number, n: number): number => {
 }
 
 /**
- * 年份转生肖[!仅能大致转换] => 精确划分生肖分界线是“立春”
+ * 年份转生肖[!仅能大致转换]  精确划分生肖分界线是“立春”
  * @param y year
  * @return Cn string
  * @eg:var animal = calendar.getAnimal(1987) ;//animal='兔'
  */
-const getAnimal = (y: number): string => {
+const getAnimal = function (y: number): string  {
     return Animals[(y - 4) % 12]
 }
 

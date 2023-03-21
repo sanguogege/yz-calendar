@@ -1,5 +1,3 @@
-import { SolarOption, LunarOption } from "../types/index";
-
 import {
     lYearDays,
     leapMonth,
@@ -23,6 +21,7 @@ import {
     solar2lunar,
     lunar2solar
 } from "../utils/Switch"
+
 
 const calendar = {
     lYearDays,

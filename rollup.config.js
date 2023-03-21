@@ -1,7 +1,6 @@
 import ts from 'rollup-plugin-typescript2'
 import path from 'path'
 import dts from 'rollup-plugin-dts';
-import json from '@rollup/plugin-json'
 import { fileURLToPath } from 'url';
 const __filenameNew = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filenameNew);
@@ -32,7 +31,6 @@ export default [{
     //配置ts
     plugins: [
         ts(),
-        json(),
     ]
 
 }, {

@@ -24,7 +24,7 @@ import {
 
 import { nStr1, SolarTerm } from "../data/Calendar";
 
-const solar2lunar = (y: number, m: number, d: number): object => {
+const solar2lunar = function (y: number, m: number, d: number): object {
     //未传参  获得当天
     let objDate: Date;
     if (!y) {
@@ -135,7 +135,7 @@ const solar2lunar = (y: number, m: number, d: number): object => {
     return DayInfo;
 }
 
-const lunar2solar = (y: number, m: number, d: number, isLeapMonth: boolean): any => {   //参数区间1900.1.31~2100.12.1
+const lunar2solar = function (y: number, m: number, d: number, isLeapMonth: boolean): any {   //参数区间1900.1.31~2100.12.1
     isLeapMonth = !!isLeapMonth;
     let leapM: any = leapMonth(y);
     if (isLeapMonth && (leapM != m)) { return -1; }//传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同

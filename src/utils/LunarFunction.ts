@@ -6,7 +6,7 @@ import { LunarInfo, Gan, Zhi, nStr3, nStr2, nStr1 } from "../data/Calendar"
 * @return Number
 * @eg:var count = calendar.lYearDays(1987) ;//count=387
 */
-const lYearDays = (y: number): number => {
+const lYearDays = function (y: number): number {
     let i, sum: number = 348;
     for (i = 0x8000; i > 0x8; i >>= 1) { sum += (LunarInfo[y - 1900] & i) ? 1 : 0; };
     return (sum + leapDays(y));
@@ -18,7 +18,7 @@ const lYearDays = (y: number): number => {
 * @return Number (0-12)
 * @eg:var leapMonth = calendar.leapMonth(1987) ;//leapMonth=6
 */
-const leapMonth = (y: number) => { //闰字编码 \u95f0
+const leapMonth = function (y: number) { //闰字编码 \u95f0
     return (LunarInfo[y - 1900] & 0xf);
 }
 
@@ -28,7 +28,7 @@ const leapMonth = (y: number) => { //闰字编码 \u95f0
  * @return Number (0、29、30)
  * @eg:var leapMonthDay = calendar.leapDays(1987) ;//leapMonthDay=29
  */
-const leapDays = (y: number): number => {
+const leapDays = function (y: number): number {
     if (leapMonth(y)) {
         return ((LunarInfo[y - 1900] & 0x10000) ? 30 : 29);
     }
@@ -41,7 +41,7 @@ const leapDays = (y: number): number => {
  * @return Number (-1、29、30)
  * @eg:var MonthDay = calendar.monthDays(1987,9) ;//MonthDay=29
  */
-const monthDays = (y: number, m: number): number => {
+const monthDays = function (y: number, m: number): number {
     if (m > 12 || m < 1) { return -1 }//月份参数从1至12，参数错误返回-1
     return ((LunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29);
 }
@@ -51,7 +51,7 @@ const monthDays = (y: number, m: number): number => {
  * @param  lYear 农历年的年份数
  * @return Cn string
  */
-const toGanZhiYear = (lYear: number): string => {
+const toGanZhiYear = function (lYear: number): string {
     let ganKey: number = (lYear - 3) % 10;
     let zhiKey: number = (lYear - 3) % 12;
     if (ganKey == 0) ganKey = 10;//如果余数为0则为最后一个天干
@@ -65,7 +65,7 @@ const toGanZhiYear = (lYear: number): string => {
  * @param offset 相对甲子的偏移量
  * @return Cn string
  */
-const toGanZhi = (offset: number): string => {
+const toGanZhi = function (offset: number): string {
     return Gan[offset % 10] + Zhi[offset % 12];
 }
 
@@ -76,7 +76,7 @@ const toGanZhi = (offset: number): string => {
  * @return Cn string
  * @eg:var cnMonth = calendar.toChinaMonth(12) ;//cnMonth='腊月'
  */
-const toChinaMonth = (m: number): any => { // 月 => \u6708
+const toChinaMonth = function (m: number): any { // 月  \u6708
     if (m > 12 || m < 1) { return -1 } //若参数错误 返回-1
     let s: string = nStr3[m - 1];
     s += "\u6708";//加上月字
@@ -88,7 +88,7 @@ const toChinaMonth = (m: number): any => { // 月 => \u6708
   * @return Cn string
   * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
   */
-const toChinaDay = (d: number): string => { //日 => \u65e5
+const toChinaDay = function (d: number): string { //日  \u65e5
     var s: string;
     switch (d) {
         case 10:

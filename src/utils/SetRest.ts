@@ -1,15 +1,15 @@
+import {
+    Rest,
+    Festival
+} from "../data/Days"
 
-import Rest from "../data/Rest.json"
-import Festival from "../data/Festival.json"
 
-const RestDay = (y: number, m: number, d: number) => {
+const RestDay = function (y: number, m: number, d: number) {
     const day = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
-    const year = y.toString();
-    const hasRest = Rest[year as keyof typeof Rest]
-    if (!!hasRest) {
+    if (Rest[y]) {
         return {
-            Xiu: hasRest.xiu.includes(day),
-            Ban: hasRest.ban.includes(day),
+            Xiu: Rest[y].xiu.includes(day),
+            Ban: Rest[y].ban.includes(day),
         }
     } else {
         console.error("您还未设置法定节假日");
@@ -20,24 +20,23 @@ const RestDay = (y: number, m: number, d: number) => {
     }
 }
 
-const getGljr = (m: number, d: number) => {
+const getGljr = function (m: number, d: number) {
     const day = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
-    const hasFestival = Festival.sFtv[day as keyof typeof Festival.sFtv]
-    if (!!hasFestival) {
-        return hasFestival
+    if (Festival.sFtv[day]) {
+        return Festival.sFtv[day]
     } else {
         return ""
     }
 }
 
-const getNljr = (m: number, d: number) => {
+const getNljr = function (m: number, d: number) {
     const day = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
-    const hasFestival = Festival.lFtv[day as keyof typeof Festival.lFtv]
-    if (hasFestival) {
-        return hasFestival
+    if (Festival.lFtv[day]) {
+        return Festival.lFtv[day]
     } else {
         return ""
     }
+
 }
 
 export {
