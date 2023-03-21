@@ -25,7 +25,7 @@ import {
 import { nStr1, SolarTerm } from "../data/Calendar";
 
 const solar2lunar = function (y: number, m: number, d: number): object {
-    //未传参  获得当天
+    //未传参获得当天
     let objDate: Date;
     if (!y) {
         objDate = new Date();
