@@ -5,10 +5,17 @@
 网页引入去dist/index.js修改Rest 
 
 ## web构建工具使用:
-
 `npm i yz-calendar`
 
-` import calendar from "yz-calendar";`
+
+```
+import calendar from "yz-calendar";
+
+
+const calendar  =  calendar.solar2lunar(2021, 3, 21)
+
+```
+
 
 
 ## 普通页面直接复制/dist.index.js
