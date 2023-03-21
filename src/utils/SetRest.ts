@@ -3,7 +3,6 @@ import {
     Festival
 } from "../data/Days"
 
-
 const RestDay = function (y: number, m: number, d: number) {
     const day = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
     if (Rest[y]) {
