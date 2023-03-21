@@ -616,7 +616,7 @@
   };
 
   const solar2lunar = function (y, m, d) {
-      //未传参  获得当天
+      //未传参获得当天
       let objDate;
       if (!y) {
           objDate = new Date();

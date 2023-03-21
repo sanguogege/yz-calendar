@@ -5,7 +5,7 @@
     "main": "dits/index.cjs.js",
     "module": "dist/index.esm.js",
     "browser": "dist/index.js",
-    "types": "index.d.ts",
+    "types": "/dist/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup -c"
@@ -18,8 +18,7 @@
     ],
     "author": "sanguogege",
     "files": [
-        "dist",
-        "index.d.ts"
+        "dist"
     ],
     "license": "ISC",
     "devDependencies": {

@@ -37,7 +37,7 @@ export default [{
     //打包声明文件
     input: "./src/core/index.ts",
     output: {
-        file: path.resolve(__dirname, './index.d.ts'),
+        file: path.resolve(__dirname, './dist/index.d.ts'),
         format: "es",
     },
     plugins: [dts()]
