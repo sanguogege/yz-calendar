@@ -1,6 +1,6 @@
 {
     "name": "yz-calendar",
-    "version": "1.4",
+    "version": "1.4.0",
     "description": "ts版本的日历生成器 LTS",
     "main": "dits/index.cjs.js",
     "module": "dist/index.esm.js",
