@@ -1,4 +1,6 @@
 declare const calendar: {
+    setRest: {};
+    Rest: {};
     lYearDays: (y: number) => number;
     leapMonth: (y: number) => number;
     leapDays: (y: number) => number;

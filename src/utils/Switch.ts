@@ -12,7 +12,9 @@ import {
 import {
     toAstro,
     getTerm,
-    getAnimal
+    getAnimal,
+    solarDays,
+    solarFirstWeek
 } from "./SolarFunction"
 
 import {
@@ -128,8 +130,8 @@ const solar2lunar = function (y: number, m: number, d: number): object {
     let Gljr = getGljr(m, d);
     let Nljr = getNljr(month, day);
 
-    let XiuBox = RestDay(y, m, d)
-
+    let XiuBox = RestDay(y, m, d, calendar.setRest)
+    calendar.Rest = XiuBox.newRest;
     // 用于设置上个月
     let DayInfo = { "Xiu": XiuBox.Xiu, "Ban": XiuBox.Ban, "Gljr": Gljr, "Nljr": Nljr, 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? "\u95f0" : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': "\u661f\u671f" + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro };
     return DayInfo;
@@ -176,8 +178,25 @@ const lunar2solar = function (y: number, m: number, d: number, isLeapMonth: bool
     return solar2lunar(cY, cM, cD);
 }
 
-
-export {
+const calendar = {
+    setRest: {},
+    Rest: {},
+    lYearDays,
+    leapMonth,
+    leapDays,
+    monthDays,
+    toGanZhiYear,
+    toGanZhi,
+    toChinaMonth,
+    toChinaDay,
+    solarDays,
+    solarFirstWeek,
+    toAstro,
+    getTerm,
+    getAnimal,
     solar2lunar,
     lunar2solar
 }
+
+
+export default calendar

@@ -3,18 +3,43 @@ import {
     Festival
 } from "../data/Days"
 
-const RestDay = function (y: number, m: number, d: number) {
+function check(data: any) {
+    var demo = {
+        2023: {
+            xiu: ["0101"],
+            "ban": ["0202", "0303"]
+        }
+    }
+    Object.keys(data).forEach(function (e: any) {
+        if (typeof (e) == "string") {
+            if (!parseInt(e)) {
+                console.error("请检查输入的key是否正确:key应为number或者可被转换的string", demo)
+                console.error("当前key为", e)
+            }
+        }
+        if (!data[e].xiu) {
+            console.error("请检查输入的休息的key格式是否正确:key应为xiu", demo)
+        }
+        if (!data[e].ban) {
+            console.error("请检查输入的调休的key格式是否正确:ban", demo)
+        }
+    })
+}
+
+const RestDay = function (y: number, m: number, d: number, data?: any) {
+    var newRest = Object.assign({}, Rest, data);
     const day = (m < 10 ? "0" + m : m.toString()) + (d < 10 ? "0" + d : d.toString());
-    if (Rest[y]) {
+    if (newRest[y]) {
         return {
-            Xiu: Rest[y].xiu.includes(day),
-            Ban: Rest[y].ban.includes(day),
+            Xiu: newRest[y].xiu.includes(day),
+            Ban: newRest[y].ban.includes(day),
+            newRest: newRest
         }
     } else {
-        console.error("您还未设置法定节假日");
         return {
             Xiu: false,
             Ban: false,
+            newRest: newRest
         }
     }
 }
