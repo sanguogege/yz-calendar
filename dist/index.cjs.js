@@ -1,179 +1,602 @@
 'use strict';
 
 /**
-* 农历1900-2100的润大小信息表
-* @Array Of Property
-* @return Hex
-*/
-const LunarInfo = [0x04bd8, 0x04ae0, 0x0a570, 0x054d5, 0x0d260, 0x0d950, 0x16554, 0x056a0, 0x09ad0, 0x055d2,
-    0x04ae0, 0x0a5b6, 0x0a4d0, 0x0d250, 0x1d255, 0x0b540, 0x0d6a0, 0x0ada2, 0x095b0, 0x14977,
-    0x04970, 0x0a4b0, 0x0b4b5, 0x06a50, 0x06d40, 0x1ab54, 0x02b60, 0x09570, 0x052f2, 0x04970,
-    0x06566, 0x0d4a0, 0x0ea50, 0x06e95, 0x05ad0, 0x02b60, 0x186e3, 0x092e0, 0x1c8d7, 0x0c950,
-    0x0d4a0, 0x1d8a6, 0x0b550, 0x056a0, 0x1a5b4, 0x025d0, 0x092d0, 0x0d2b2, 0x0a950, 0x0b557,
-    0x06ca0, 0x0b550, 0x15355, 0x04da0, 0x0a5b0, 0x14573, 0x052b0, 0x0a9a8, 0x0e950, 0x06aa0,
-    0x0aea6, 0x0ab50, 0x04b60, 0x0aae4, 0x0a570, 0x05260, 0x0f263, 0x0d950, 0x05b57, 0x056a0,
-    0x096d0, 0x04dd5, 0x04ad0, 0x0a4d0, 0x0d4d4, 0x0d250, 0x0d558, 0x0b540, 0x0b6a0, 0x195a6,
-    0x095b0, 0x049b0, 0x0a974, 0x0a4b0, 0x0b27a, 0x06a50, 0x06d40, 0x0af46, 0x0ab60, 0x09570,
-    0x04af5, 0x04970, 0x064b0, 0x074a3, 0x0ea50, 0x06b58, 0x055c0, 0x0ab60, 0x096d5, 0x092e0,
-    0x0c960, 0x0d954, 0x0d4a0, 0x0da50, 0x07552, 0x056a0, 0x0abb7, 0x025d0, 0x092d0, 0x0cab5,
-    0x0a950, 0x0b4a0, 0x0baa4, 0x0ad50, 0x055d9, 0x04ba0, 0x0a5b0, 0x15176, 0x052b0, 0x0a930,
-    0x07954, 0x06aa0, 0x0ad50, 0x05b52, 0x04b60, 0x0a6e6, 0x0a4e0, 0x0d260, 0x0ea65, 0x0d530,
-    0x05aa0, 0x076a3, 0x096d0, 0x04afb, 0x04ad0, 0x0a4d0, 0x1d0b6, 0x0d250, 0x0d520, 0x0dd45,
-    0x0b5a0, 0x056d0, 0x055b2, 0x049b0, 0x0a577, 0x0a4b0, 0x0aa50, 0x1b255, 0x06d20, 0x0ada0,
-    0x14b63, 0x09370, 0x049f8, 0x04970, 0x064b0, 0x168a6, 0x0ea50, 0x06b20, 0x1a6c4, 0x0aae0,
-    0x0a2e0, 0x0d2e3, 0x0c960, 0x0d557, 0x0d4a0, 0x0da50, 0x05d55, 0x056a0, 0x0a6d0, 0x055d4,
-    0x052d0, 0x0a9b8, 0x0a950, 0x0b4a0, 0x0b6a6, 0x0ad50, 0x055a0, 0x0aba4, 0x0a5b0, 0x052b0,
-    0x0b273, 0x06930, 0x07337, 0x06aa0, 0x0ad50, 0x14b55, 0x04b60, 0x0a570, 0x054e4, 0x0d160,
-    0x0e968, 0x0d520, 0x0daa0, 0x16aa6, 0x056d0, 0x04ae0, 0x0a9d4, 0x0a2d0, 0x0d150, 0x0f252,
-    0x0d520];
+ * 农历1900-2100的润大小信息表
+ * @Array Of Property
+ * @return Hex
+ */
+const LunarInfo = [
+    0x04bd8,
+    0x04ae0,
+    0x0a570,
+    0x054d5,
+    0x0d260,
+    0x0d950,
+    0x16554,
+    0x056a0,
+    0x09ad0,
+    0x055d2,
+    0x04ae0,
+    0x0a5b6,
+    0x0a4d0,
+    0x0d250,
+    0x1d255,
+    0x0b540,
+    0x0d6a0,
+    0x0ada2,
+    0x095b0,
+    0x14977,
+    0x04970,
+    0x0a4b0,
+    0x0b4b5,
+    0x06a50,
+    0x06d40,
+    0x1ab54,
+    0x02b60,
+    0x09570,
+    0x052f2,
+    0x04970,
+    0x06566,
+    0x0d4a0,
+    0x0ea50,
+    0x06e95,
+    0x05ad0,
+    0x02b60,
+    0x186e3,
+    0x092e0,
+    0x1c8d7,
+    0x0c950,
+    0x0d4a0,
+    0x1d8a6,
+    0x0b550,
+    0x056a0,
+    0x1a5b4,
+    0x025d0,
+    0x092d0,
+    0x0d2b2,
+    0x0a950,
+    0x0b557,
+    0x06ca0,
+    0x0b550,
+    0x15355,
+    0x04da0,
+    0x0a5b0,
+    0x14573,
+    0x052b0,
+    0x0a9a8,
+    0x0e950,
+    0x06aa0,
+    0x0aea6,
+    0x0ab50,
+    0x04b60,
+    0x0aae4,
+    0x0a570,
+    0x05260,
+    0x0f263,
+    0x0d950,
+    0x05b57,
+    0x056a0,
+    0x096d0,
+    0x04dd5,
+    0x04ad0,
+    0x0a4d0,
+    0x0d4d4,
+    0x0d250,
+    0x0d558,
+    0x0b540,
+    0x0b6a0,
+    0x195a6,
+    0x095b0,
+    0x049b0,
+    0x0a974,
+    0x0a4b0,
+    0x0b27a,
+    0x06a50,
+    0x06d40,
+    0x0af46,
+    0x0ab60,
+    0x09570,
+    0x04af5,
+    0x04970,
+    0x064b0,
+    0x074a3,
+    0x0ea50,
+    0x06b58,
+    0x055c0,
+    0x0ab60,
+    0x096d5,
+    0x092e0,
+    0x0c960,
+    0x0d954,
+    0x0d4a0,
+    0x0da50,
+    0x07552,
+    0x056a0,
+    0x0abb7,
+    0x025d0,
+    0x092d0,
+    0x0cab5,
+    0x0a950,
+    0x0b4a0,
+    0x0baa4,
+    0x0ad50,
+    0x055d9,
+    0x04ba0,
+    0x0a5b0,
+    0x15176,
+    0x052b0,
+    0x0a930,
+    0x07954,
+    0x06aa0,
+    0x0ad50,
+    0x05b52,
+    0x04b60,
+    0x0a6e6,
+    0x0a4e0,
+    0x0d260,
+    0x0ea65,
+    0x0d530,
+    0x05aa0,
+    0x076a3,
+    0x096d0,
+    0x04afb,
+    0x04ad0,
+    0x0a4d0,
+    0x1d0b6,
+    0x0d250,
+    0x0d520,
+    0x0dd45,
+    0x0b5a0,
+    0x056d0,
+    0x055b2,
+    0x049b0,
+    0x0a577,
+    0x0a4b0,
+    0x0aa50,
+    0x1b255,
+    0x06d20,
+    0x0ada0,
+    0x14b63,
+    0x09370,
+    0x049f8,
+    0x04970,
+    0x064b0,
+    0x168a6,
+    0x0ea50,
+    0x06b20,
+    0x1a6c4,
+    0x0aae0,
+    0x0a2e0,
+    0x0d2e3,
+    0x0c960,
+    0x0d557,
+    0x0d4a0,
+    0x0da50,
+    0x05d55,
+    0x056a0,
+    0x0a6d0,
+    0x055d4,
+    0x052d0,
+    0x0a9b8,
+    0x0a950,
+    0x0b4a0,
+    0x0b6a6,
+    0x0ad50,
+    0x055a0,
+    0x0aba4,
+    0x0a5b0,
+    0x052b0,
+    0x0b273,
+    0x06930,
+    0x07337,
+    0x06aa0,
+    0x0ad50,
+    0x14b55,
+    0x04b60,
+    0x0a570,
+    0x054e4,
+    0x0d160,
+    0x0e968,
+    0x0d520,
+    0x0daa0,
+    0x16aa6,
+    0x056d0,
+    0x04ae0,
+    0x0a9d4,
+    0x0a2d0,
+    0x0d150,
+    0x0f252,
+    0x0d520,
+];
 /**
-     * 公历每个月份的天数普通表
-     * @Array Of Property
-     * @return Number
-     */
+ * 公历每个月份的天数普通表
+ * @Array Of Property
+ * @return Number
+ */
 const SolarMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
 /**
-   * 天干地支之天干速查表
-   * @Array Of Property trans["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
-   * @return Cn string
-   */
-const Gan = ["\u7532", "\u4e59", "\u4e19", "\u4e01", "\u620a", "\u5df1", "\u5e9a", "\u8f9b", "\u58ec", "\u7678"];
+ * 天干地支之天干速查表
+ * @Array Of Property trans["甲","乙","丙","丁","戊","己","庚","辛","壬","癸"]
+ * @return Cn string
+ */
+const Gan = [
+    "\u7532",
+    "\u4e59",
+    "\u4e19",
+    "\u4e01",
+    "\u620a",
+    "\u5df1",
+    "\u5e9a",
+    "\u8f9b",
+    "\u58ec",
+    "\u7678",
+];
 /**
-  * 天干地支之地支速查表
-  * @Array Of Property
-  * @trans["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
-  * @return Cn string
-  */
-const Zhi = ["\u5b50", "\u4e11", "\u5bc5", "\u536f", "\u8fb0", "\u5df3", "\u5348", "\u672a", "\u7533", "\u9149", "\u620c", "\u4ea5"];
+ * 天干地支之地支速查表
+ * @Array Of Property
+ * @trans["子","丑","寅","卯","辰","巳","午","未","申","酉","戌","亥"]
+ * @return Cn string
+ */
+const Zhi = [
+    "\u5b50",
+    "\u4e11",
+    "\u5bc5",
+    "\u536f",
+    "\u8fb0",
+    "\u5df3",
+    "\u5348",
+    "\u672a",
+    "\u7533",
+    "\u9149",
+    "\u620c",
+    "\u4ea5",
+];
 /**
-  * 天干地支之地支速查表<=>生肖
-  * @Array Of Property
-  * @trans["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"]
-  * @return Cn string
-  */
-const Animals = ["\u9f20", "\u725b", "\u864e", "\u5154", "\u9f99", "\u86c7", "\u9a6c", "\u7f8a", "\u7334", "\u9e21", "\u72d7", "\u732a"];
+ * 每日的时辰对照表
+ * @Array Of Property
+ * @return Cn string
+ */
+const GanZhiHour = [
+    "甲子-乙丑-丙寅-丁卯-戊辰-己巳-庚午-辛未-壬申-癸酉-甲戌-乙亥",
+    "丙子-丁丑-戊寅-己卯-庚辰-辛巳-壬午-癸未-甲申-乙酉-丙戌-丁亥",
+    "戊子-己丑-庚寅-辛卯-壬辰-癸巳-甲午-乙未-丙申-丁酉-戊戌-己亥",
+    "庚子-辛丑-壬寅-癸卯-甲辰-乙巳-丙午-丁未-戊申-己酉-庚戌-辛亥",
+    "壬子-癸丑-甲寅-乙卯-丙辰-丁巳-戊午-己未-庚申-辛酉-壬戌-癸亥",
+    "甲子-乙丑-丙寅-丁卯-戊辰-己巳-庚午-辛未-壬申-癸酉-甲戌-乙亥",
+    "丙子-丁丑-戊寅-己卯-庚辰-辛巳-壬午-癸未-甲申-乙酉-丙戌-丁亥",
+    "戊子-己丑-庚寅-辛卯-壬辰-癸巳-甲午-乙未-丙申-丁酉-戊戌-己亥",
+    "庚子-辛丑-壬寅-癸卯-甲辰-乙巳-丙午-丁未-戊申-己酉-庚戌-辛亥",
+    "壬子-癸丑-甲寅-乙卯-丙辰-丁巳-戊午-己未-庚申-辛酉-壬戌-癸亥",
+];
 /**
-  * 24节气速查表
-  * @Array Of Property
-  * @trans["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
-  * @return Cn string
-  */
-const SolarTerm = ["\u5c0f\u5bd2", "\u5927\u5bd2", "\u7acb\u6625", "\u96e8\u6c34", "\u60ca\u86f0", "\u6625\u5206", "\u6e05\u660e", "\u8c37\u96e8", "\u7acb\u590f", "\u5c0f\u6ee1", "\u8292\u79cd", "\u590f\u81f3", "\u5c0f\u6691", "\u5927\u6691", "\u7acb\u79cb", "\u5904\u6691", "\u767d\u9732", "\u79cb\u5206", "\u5bd2\u9732", "\u971c\u964d", "\u7acb\u51ac", "\u5c0f\u96ea", "\u5927\u96ea", "\u51ac\u81f3"];
+ * 天干地支之地支速查表<=>生肖
+ * @Array Of Property
+ * @trans["鼠","牛","虎","兔","龙","蛇","马","羊","猴","鸡","狗","猪"]
+ * @return Cn string
+ */
+const Animals = [
+    "\u9f20",
+    "\u725b",
+    "\u864e",
+    "\u5154",
+    "\u9f99",
+    "\u86c7",
+    "\u9a6c",
+    "\u7f8a",
+    "\u7334",
+    "\u9e21",
+    "\u72d7",
+    "\u732a",
+];
 /**
-  * 1900-2100各年的24节气日期速查表
-  * @Array Of Property
-  * @return 0x string For splice
-  */
-const TermInfo = ['9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e', '97bcf97c3598082c95f8c965cc920f',
-    '97bd0b06bdb0722c965ce1cfcc920f', 'b027097bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e',
-    '97bcf97c359801ec95f8c965cc920f', '97bd0b06bdb0722c965ce1cfcc920f', 'b027097bd097c36b0b6fc9274c91aa',
-    '97b6b97bd19801ec9210c965cc920e', '97bcf97c359801ec95f8c965cc920f', '97bd0b06bdb0722c965ce1cfcc920f',
-    'b027097bd097c36b0b6fc9274c91aa', '9778397bd19801ec9210c965cc920e', '97b6b97bd19801ec95f8c965cc920f',
-    '97bd09801d98082c95f8e1cfcc920f', '97bd097bd097c36b0b6fc9210c8dc2', '9778397bd197c36c9210c9274c91aa',
-    '97b6b97bd19801ec95f8c965cc920e', '97bd09801d98082c95f8e1cfcc920f', '97bd097bd097c36b0b6fc9210c8dc2',
-    '9778397bd097c36c9210c9274c91aa', '97b6b97bd19801ec95f8c965cc920e', '97bcf97c3598082c95f8e1cfcc920f',
-    '97bd097bd097c36b0b6fc9210c8dc2', '9778397bd097c36c9210c9274c91aa', '97b6b97bd19801ec9210c965cc920e',
-    '97bcf97c3598082c95f8c965cc920f', '97bd097bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b97bd19801ec9210c965cc920e', '97bcf97c3598082c95f8c965cc920f', '97bd097bd097c35b0b6fc920fb0722',
-    '9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e', '97bcf97c359801ec95f8c965cc920f',
-    '97bd097bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e',
-    '97bcf97c359801ec95f8c965cc920f', '97bd097bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b97bd19801ec9210c965cc920e', '97bcf97c359801ec95f8c965cc920f', '97bd097bd07f595b0b6fc920fb0722',
-    '9778397bd097c36b0b6fc9210c8dc2', '9778397bd19801ec9210c9274c920e', '97b6b97bd19801ec95f8c965cc920f',
-    '97bd07f5307f595b0b0bc920fb0722', '7f0e397bd097c36b0b6fc9210c8dc2', '9778397bd097c36c9210c9274c920e',
-    '97b6b97bd19801ec95f8c965cc920f', '97bd07f5307f595b0b0bc920fb0722', '7f0e397bd097c36b0b6fc9210c8dc2',
-    '9778397bd097c36c9210c9274c91aa', '97b6b97bd19801ec9210c965cc920e', '97bd07f1487f595b0b0bc920fb0722',
-    '7f0e397bd097c36b0b6fc9210c8dc2', '9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e',
-    '97bcf7f1487f595b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b97bd19801ec9210c965cc920e', '97bcf7f1487f595b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722',
-    '9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e', '97bcf7f1487f531b0b0bb0b6fb0722',
-    '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b97bd19801ec9210c965cc920e',
-    '97bcf7f1487f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b97bd19801ec9210c9274c920e', '97bcf7f0e47f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722',
-    '9778397bd097c36b0b6fc9210c91aa', '97b6b97bd197c36c9210c9274c920e', '97bcf7f0e47f531b0b0bb0b6fb0722',
-    '7f0e397bd07f595b0b0bc920fb0722', '9778397bd097c36b0b6fc9210c8dc2', '9778397bd097c36c9210c9274c920e',
-    '97b6b7f0e47f531b0723b0b6fb0722', '7f0e37f5307f595b0b0bc920fb0722', '7f0e397bd097c36b0b6fc9210c8dc2',
-    '9778397bd097c36b0b70c9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721', '7f0e37f1487f595b0b0bb0b6fb0722',
-    '7f0e397bd097c35b0b6fc9210c8dc2', '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721',
-    '7f0e27f1487f595b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722',
-    '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722',
-    '7f0e397bd097c35b0b6fc920fb0722', '9778397bd097c36b0b6fc9274c91aa', '97b6b7f0e47f531b0723b0b6fb0721',
-    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722', '9778397bd097c36b0b6fc9274c91aa',
-    '97b6b7f0e47f531b0723b0787b0721', '7f0e27f0e47f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722',
-    '9778397bd097c36b0b6fc9210c91aa', '97b6b7f0e47f149b0723b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722',
-    '7f0e397bd07f595b0b0bc920fb0722', '9778397bd097c36b0b6fc9210c8dc2', '977837f0e37f149b0723b0787b0721',
-    '7f07e7f0e47f531b0723b0b6fb0722', '7f0e37f5307f595b0b0bc920fb0722', '7f0e397bd097c35b0b6fc9210c8dc2',
-    '977837f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e37f1487f595b0b0bb0b6fb0722',
-    '7f0e397bd097c35b0b6fc9210c8dc2', '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
-    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722', '977837f0e37f14998082b0787b06bd',
-    '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd097c35b0b6fc920fb0722',
-    '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722',
-    '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
-    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14998082b0787b06bd',
-    '7f07e7f0e47f149b0723b0787b0721', '7f0e27f0e47f531b0b0bb0b6fb0722', '7f0e397bd07f595b0b0bc920fb0722',
-    '977837f0e37f14998082b0723b06bd', '7f07e7f0e37f149b0723b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722',
-    '7f0e397bd07f595b0b0bc920fb0722', '977837f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b0721',
-    '7f07e7f0e47f531b0723b0b6fb0722', '7f0e37f1487f595b0b0bb0b6fb0722', '7f0e37f0e37f14898082b0723b02d5',
-    '7ec967f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722', '7f0e37f1487f531b0b0bb0b6fb0722',
-    '7f0e37f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
-    '7f0e37f1487f531b0b0bb0b6fb0722', '7f0e37f0e37f14898082b072297c35', '7ec967f0e37f14998082b0787b06bd',
-    '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e37f0e37f14898082b072297c35',
-    '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722',
-    '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f149b0723b0787b0721',
-    '7f0e27f1487f531b0b0bb0b6fb0722', '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14998082b0723b06bd',
-    '7f07e7f0e47f149b0723b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722', '7f0e37f0e366aa89801eb072297c35',
-    '7ec967f0e37f14998082b0723b06bd', '7f07e7f0e37f14998083b0787b0721', '7f0e27f0e47f531b0723b0b6fb0722',
-    '7f0e37f0e366aa89801eb072297c35', '7ec967f0e37f14898082b0723b02d5', '7f07e7f0e37f14998082b0787b0721',
-    '7f07e7f0e47f531b0723b0b6fb0722', '7f0e36665b66aa89801e9808297c35', '665f67f0e37f14898082b0723b02d5',
-    '7ec967f0e37f14998082b0787b0721', '7f07e7f0e47f531b0723b0b6fb0722', '7f0e36665b66a449801e9808297c35',
-    '665f67f0e37f14898082b0723b02d5', '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721',
-    '7f0e36665b66a449801e9808297c35', '665f67f0e37f14898082b072297c35', '7ec967f0e37f14998082b0787b06bd',
-    '7f07e7f0e47f531b0723b0b6fb0721', '7f0e26665b66a449801e9808297c35', '665f67f0e37f1489801eb072297c35',
-    '7ec967f0e37f14998082b0787b06bd', '7f07e7f0e47f531b0723b0b6fb0721', '7f0e27f1487f531b0b0bb0b6fb0722'];
+ * 24节气速查表
+ * @Array Of Property
+ * @trans["小寒","大寒","立春","雨水","惊蛰","春分","清明","谷雨","立夏","小满","芒种","夏至","小暑","大暑","立秋","处暑","白露","秋分","寒露","霜降","立冬","小雪","大雪","冬至"]
+ * @return Cn string
+ */
+const SolarTerm = [
+    "\u5c0f\u5bd2",
+    "\u5927\u5bd2",
+    "\u7acb\u6625",
+    "\u96e8\u6c34",
+    "\u60ca\u86f0",
+    "\u6625\u5206",
+    "\u6e05\u660e",
+    "\u8c37\u96e8",
+    "\u7acb\u590f",
+    "\u5c0f\u6ee1",
+    "\u8292\u79cd",
+    "\u590f\u81f3",
+    "\u5c0f\u6691",
+    "\u5927\u6691",
+    "\u7acb\u79cb",
+    "\u5904\u6691",
+    "\u767d\u9732",
+    "\u79cb\u5206",
+    "\u5bd2\u9732",
+    "\u971c\u964d",
+    "\u7acb\u51ac",
+    "\u5c0f\u96ea",
+    "\u5927\u96ea",
+    "\u51ac\u81f3",
+];
 /**
-  * 数字转中文速查表
-  * @Array Of Property
-  * @trans ['日','一','二','三','四','五','六','七','八','九','十']
-  * @return Cn string
-  */
-const nStr1 = ["\u65e5", "\u4e00", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d", "\u4e03", "\u516b", "\u4e5d", "\u5341"];
+ * 1900-2100各年的24节气日期速查表
+ * @Array Of Property
+ * @return 0x string For splice
+ */
+const TermInfo = [
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c3598082c95f8c965cc920f",
+    "97bd0b06bdb0722c965ce1cfcc920f",
+    "b027097bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c359801ec95f8c965cc920f",
+    "97bd0b06bdb0722c965ce1cfcc920f",
+    "b027097bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c359801ec95f8c965cc920f",
+    "97bd0b06bdb0722c965ce1cfcc920f",
+    "b027097bd097c36b0b6fc9274c91aa",
+    "9778397bd19801ec9210c965cc920e",
+    "97b6b97bd19801ec95f8c965cc920f",
+    "97bd09801d98082c95f8e1cfcc920f",
+    "97bd097bd097c36b0b6fc9210c8dc2",
+    "9778397bd197c36c9210c9274c91aa",
+    "97b6b97bd19801ec95f8c965cc920e",
+    "97bd09801d98082c95f8e1cfcc920f",
+    "97bd097bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36c9210c9274c91aa",
+    "97b6b97bd19801ec95f8c965cc920e",
+    "97bcf97c3598082c95f8e1cfcc920f",
+    "97bd097bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36c9210c9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c3598082c95f8c965cc920f",
+    "97bd097bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c3598082c95f8c965cc920f",
+    "97bd097bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c359801ec95f8c965cc920f",
+    "97bd097bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c359801ec95f8c965cc920f",
+    "97bd097bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf97c359801ec95f8c965cc920f",
+    "97bd097bd07f595b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9210c8dc2",
+    "9778397bd19801ec9210c9274c920e",
+    "97b6b97bd19801ec95f8c965cc920f",
+    "97bd07f5307f595b0b0bc920fb0722",
+    "7f0e397bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36c9210c9274c920e",
+    "97b6b97bd19801ec95f8c965cc920f",
+    "97bd07f5307f595b0b0bc920fb0722",
+    "7f0e397bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36c9210c9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bd07f1487f595b0b0bc920fb0722",
+    "7f0e397bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf7f1487f595b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf7f1487f595b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf7f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c965cc920e",
+    "97bcf7f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b97bd19801ec9210c9274c920e",
+    "97bcf7f0e47f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "9778397bd097c36b0b6fc9210c91aa",
+    "97b6b97bd197c36c9210c9274c920e",
+    "97bcf7f0e47f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "9778397bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36c9210c9274c920e",
+    "97b6b7f0e47f531b0723b0b6fb0722",
+    "7f0e37f5307f595b0b0bc920fb0722",
+    "7f0e397bd097c36b0b6fc9210c8dc2",
+    "9778397bd097c36b0b70c9274c91aa",
+    "97b6b7f0e47f531b0723b0b6fb0721",
+    "7f0e37f1487f595b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc9210c8dc2",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f595b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "9778397bd097c36b0b6fc9274c91aa",
+    "97b6b7f0e47f531b0723b0787b0721",
+    "7f0e27f0e47f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "9778397bd097c36b0b6fc9210c91aa",
+    "97b6b7f0e47f149b0723b0787b0721",
+    "7f0e27f0e47f531b0723b0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "9778397bd097c36b0b6fc9210c8dc2",
+    "977837f0e37f149b0723b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0722",
+    "7f0e37f5307f595b0b0bc920fb0722",
+    "7f0e397bd097c35b0b6fc9210c8dc2",
+    "977837f0e37f14998082b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e37f1487f595b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc9210c8dc2",
+    "977837f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "977837f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd097c35b0b6fc920fb0722",
+    "977837f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "977837f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "977837f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f149b0723b0787b0721",
+    "7f0e27f0e47f531b0b0bb0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "977837f0e37f14998082b0723b06bd",
+    "7f07e7f0e37f149b0723b0787b0721",
+    "7f0e27f0e47f531b0723b0b6fb0722",
+    "7f0e397bd07f595b0b0bc920fb0722",
+    "977837f0e37f14898082b0723b02d5",
+    "7ec967f0e37f14998082b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0722",
+    "7f0e37f1487f595b0b0bb0b6fb0722",
+    "7f0e37f0e37f14898082b0723b02d5",
+    "7ec967f0e37f14998082b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0722",
+    "7f0e37f1487f531b0b0bb0b6fb0722",
+    "7f0e37f0e37f14898082b0723b02d5",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e37f1487f531b0b0bb0b6fb0722",
+    "7f0e37f0e37f14898082b072297c35",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e37f0e37f14898082b072297c35",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e37f0e366aa89801eb072297c35",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f149b0723b0787b0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+    "7f0e37f0e366aa89801eb072297c35",
+    "7ec967f0e37f14998082b0723b06bd",
+    "7f07e7f0e47f149b0723b0787b0721",
+    "7f0e27f0e47f531b0723b0b6fb0722",
+    "7f0e37f0e366aa89801eb072297c35",
+    "7ec967f0e37f14998082b0723b06bd",
+    "7f07e7f0e37f14998083b0787b0721",
+    "7f0e27f0e47f531b0723b0b6fb0722",
+    "7f0e37f0e366aa89801eb072297c35",
+    "7ec967f0e37f14898082b0723b02d5",
+    "7f07e7f0e37f14998082b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0722",
+    "7f0e36665b66aa89801e9808297c35",
+    "665f67f0e37f14898082b0723b02d5",
+    "7ec967f0e37f14998082b0787b0721",
+    "7f07e7f0e47f531b0723b0b6fb0722",
+    "7f0e36665b66a449801e9808297c35",
+    "665f67f0e37f14898082b0723b02d5",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e36665b66a449801e9808297c35",
+    "665f67f0e37f14898082b072297c35",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e26665b66a449801e9808297c35",
+    "665f67f0e37f1489801eb072297c35",
+    "7ec967f0e37f14998082b0787b06bd",
+    "7f07e7f0e47f531b0723b0b6fb0721",
+    "7f0e27f1487f531b0b0bb0b6fb0722",
+];
 /**
-  * 日期转农历称呼速查表
-  * @Array Of Property
-  * @trans ['初','十','廿','卅']
-  * @return Cn string
-  */
+ * 数字转中文速查表
+ * @Array Of Property
+ * @trans ['日','一','二','三','四','五','六','七','八','九','十']
+ * @return Cn string
+ */
+const nStr1 = [
+    "\u65e5",
+    "\u4e00",
+    "\u4e8c",
+    "\u4e09",
+    "\u56db",
+    "\u4e94",
+    "\u516d",
+    "\u4e03",
+    "\u516b",
+    "\u4e5d",
+    "\u5341",
+];
+/**
+ * 日期转农历称呼速查表
+ * @Array Of Property
+ * @trans ['初','十','廿','卅']
+ * @return Cn string
+ */
 const nStr2 = ["\u521d", "\u5341", "\u5eff", "\u5345"];
 /**
-  * 月份转农历称呼速查表
-  * @Array Of Property
-  * @trans ['正','一','二','三','四','五','六','七','八','九','十','冬','腊']
-  * @return Cn string
-  */
-const nStr3 = ["\u6b63", "\u4e8c", "\u4e09", "\u56db", "\u4e94", "\u516d", "\u4e03", "\u516b", "\u4e5d", "\u5341", "\u51ac", "\u814a"];
+ * 月份转农历称呼速查表
+ * @Array Of Property
+ * @trans ['正','一','二','三','四','五','六','七','八','九','十','冬','腊']
+ * @return Cn string
+ */
+const nStr3 = [
+    "\u6b63",
+    "\u4e8c",
+    "\u4e09",
+    "\u56db",
+    "\u4e94",
+    "\u516d",
+    "\u4e03",
+    "\u516b",
+    "\u4e5d",
+    "\u5341",
+    "\u51ac",
+    "\u814a",
+];
 
 /**
-* 返回农历y年一整年的总天数
-* @param lunar Year
-* @return Number
-* @eg:var count = calendar.lYearDays(1987) ;//count=387
-*/
+ * 返回农历y年一整年的总天数
+ * @param lunar Year
+ * @return Number
+ * @eg:var count = calendar.lYearDays(1987) ;//count=387
+ */
 const lYearDays = function (y) {
     let i, sum = 348;
     for (i = 0x8000; i > 0x8; i >>= 1) {
-        sum += (LunarInfo[y - 1900] & i) ? 1 : 0;
+        sum += LunarInfo[y - 1900] & i ? 1 : 0;
     }
-    return (sum + leapDays(y));
+    return sum + leapDays(y);
 };
 /**
-* 返回农历y年闰月是哪个月；若y年没有闰月 则返回0
-* @param lunar Year
-* @return Number (0-12)
-* @eg:var leapMonth = calendar.leapMonth(1987) ;//leapMonth=6
-*/
+ * 返回农历y年闰月是哪个月；若y年没有闰月 则返回0
+ * @param lunar Year
+ * @return Number (0-12)
+ * @eg:var leapMonth = calendar.leapMonth(1987) ;//leapMonth=6
+ */
 const leapMonth = function (y) {
-    return (LunarInfo[y - 1900] & 0xf);
+    //闰字编码 \u95f0
+    return LunarInfo[y - 1900] & 0xf;
 };
 /**
  * 返回农历y年闰月的天数 若该年没有闰月则返回0
@@ -183,9 +606,9 @@ const leapMonth = function (y) {
  */
 const leapDays = function (y) {
     if (leapMonth(y)) {
-        return ((LunarInfo[y - 1900] & 0x10000) ? 30 : 29);
+        return LunarInfo[y - 1900] & 0x10000 ? 30 : 29;
     }
-    return (0);
+    return 0;
 };
 /**
  * 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
@@ -197,7 +620,7 @@ const monthDays = function (y, m) {
     if (m > 12 || m < 1) {
         return -1;
     } //月份参数从1至12，参数错误返回-1
-    return ((LunarInfo[y - 1900] & (0x10000 >> m)) ? 30 : 29);
+    return LunarInfo[y - 1900] & (0x10000 >> m) ? 30 : 29;
 };
 /**
  * 农历年份转换为干支纪年
@@ -222,12 +645,22 @@ const toGanZhi = function (offset) {
     return Gan[offset % 10] + Zhi[offset % 12];
 };
 /**
+ * 传入offset偏移量返回干支
+ * @param offset 相对甲子的偏移量
+ * @return Cn string
+ */
+const toHourGanZhi = function (offset) {
+    var gzDtr = GanZhiHour[offset % 10];
+    return gzDtr.split("-");
+};
+/**
  * 传入农历数字月份返回汉语通俗表示法
  * @param lunar month
  * @return Cn string
  * @eg:var cnMonth = calendar.toChinaMonth(12) ;//cnMonth='腊月'
  */
 const toChinaMonth = function (m) {
+    // 月  \u6708
     if (m > 12 || m < 1) {
         return -1;
     } //若参数错误 返回-1
@@ -236,28 +669,29 @@ const toChinaMonth = function (m) {
     return s;
 };
 /**
-  * 传入农历日期数字返回汉字表示法
-  * @param lunar day
-  * @return Cn string
-  * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
-  */
+ * 传入农历日期数字返回汉字表示法
+ * @param lunar day
+ * @return Cn string
+ * @eg:var cnDay = calendar.toChinaDay(21) ;//cnMonth='廿一'
+ */
 const toChinaDay = function (d) {
+    //日  \u65e5
     var s;
     switch (d) {
         case 10:
-            s = '\u521d\u5341';
+            s = "\u521d\u5341";
             break;
         case 20:
-            s = '\u4e8c\u5341';
+            s = "\u4e8c\u5341";
             break;
         case 30:
-            s = '\u4e09\u5341';
+            s = "\u4e09\u5341";
             break;
         default:
             s = nStr2[Math.floor(d / 10)];
             s += nStr1[d % 10];
     }
-    return (s);
+    return s;
 };
 
 /**
@@ -616,10 +1050,12 @@ const solar2lunar = function (y, m, d) {
     }
     let i, leap = 0, temp = 0;
     //修正ymd参数
-    y = objDate.getFullYear(),
-        m = objDate.getMonth() + 1,
-        d = objDate.getDate();
-    let offset = (Date.UTC(objDate.getFullYear(), objDate.getMonth(), objDate.getDate()) - Date.UTC(1900, 0, 31)) / 86400000;
+    (y = objDate.getFullYear()),
+        (m = objDate.getMonth() + 1),
+        (d = objDate.getDate());
+    let offset = (Date.UTC(objDate.getFullYear(), objDate.getMonth(), objDate.getDate()) -
+        Date.UTC(1900, 0, 31)) /
+        86400000;
     for (i = 1900; i < 2101 && offset > 0; i++) {
         temp = lYearDays(i);
         offset -= temp;
@@ -630,7 +1066,9 @@ const solar2lunar = function (y, m, d) {
     }
     //是否今天
     let isTodayObj = new Date(), isToday = false;
-    if (isTodayObj.getFullYear() == y && isTodayObj.getMonth() + 1 == m && isTodayObj.getDate() == d) {
+    if (isTodayObj.getFullYear() == y &&
+        isTodayObj.getMonth() + 1 == m &&
+        isTodayObj.getDate() == d) {
         isToday = true;
     }
     //星期几
@@ -646,7 +1084,7 @@ const solar2lunar = function (y, m, d) {
     //效验闰月
     for (i = 1; i < 13 && offset > 0; i++) {
         //闰月
-        if (leap > 0 && i == (leap + 1) && isLeap == false) {
+        if (leap > 0 && i == leap + 1 && isLeap == false) {
             --i;
             isLeap = true;
             temp = leapDays(year); //计算农历闰月天数
@@ -655,7 +1093,7 @@ const solar2lunar = function (y, m, d) {
             temp = monthDays(year, i); //计算农历普通月天数
         }
         //解除闰月
-        if (isLeap == true && i == (leap + 1)) {
+        if (isLeap == true && i == leap + 1) {
             isLeap = false;
         }
         offset -= temp;
@@ -683,8 +1121,8 @@ const solar2lunar = function (y, m, d) {
     let gzY = toGanZhiYear(year);
     // 当月的两个节气
     // bugfix-2017-7-24 11:03:38 use lunar Year Param `y` Not `year`
-    let firstNode = getTerm(y, (m * 2 - 1)); //返回当月「节」为几日开始
-    let secondNode = getTerm(y, (m * 2)); //返回当月「节」为几日开始
+    let firstNode = getTerm(y, m * 2 - 1); //返回当月「节」为几日开始
+    let secondNode = getTerm(y, m * 2); //返回当月「节」为几日开始
     // 依据12节气修正干支月
     let gzM = toGanZhi((y - 1900) * 12 + m + 11);
     if (d >= firstNode) {
@@ -704,6 +1142,8 @@ const solar2lunar = function (y, m, d) {
     //日柱 当月一日与 1900/1/1 相差天数
     let dayCyclical = Date.UTC(y, sm, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10;
     let gzD = toGanZhi(dayCyclical + d - 1);
+    // 二十四小时对应的天干地支
+    let gzH = toHourGanZhi(dayCyclical + d - 1);
     //该日期所属的星座
     let astro = toAstro(m, d);
     // 设置公里节日
@@ -712,22 +1152,48 @@ const solar2lunar = function (y, m, d) {
     let XiuBox = RestDay(y, m, d, calendar.setRest);
     calendar.Rest = XiuBox.newRest;
     // 用于设置上个月
-    let DayInfo = { "Xiu": XiuBox.Xiu, "Ban": XiuBox.Ban, "Gljr": Gljr, "Nljr": Nljr, 'lYear': year, 'lMonth': month, 'lDay': day, 'Animal': getAnimal(year), 'IMonthCn': (isLeap ? "\u95f0" : '') + toChinaMonth(month), 'IDayCn': toChinaDay(day), 'cYear': y, 'cMonth': m, 'cDay': d, 'gzYear': gzY, 'gzMonth': gzM, 'gzDay': gzD, 'isToday': isToday, 'isLeap': isLeap, 'nWeek': nWeek, 'ncWeek': "\u661f\u671f" + cWeek, 'isTerm': isTerm, 'Term': Term, 'astro': astro };
+    let DayInfo = {
+        Xiu: XiuBox.Xiu,
+        Ban: XiuBox.Ban,
+        Gljr: Gljr,
+        Nljr: Nljr,
+        lYear: year,
+        lMonth: month,
+        lDay: day,
+        Animal: getAnimal(year),
+        IMonthCn: (isLeap ? "\u95f0" : "") + toChinaMonth(month),
+        IDayCn: toChinaDay(day),
+        cYear: y,
+        cMonth: m,
+        cDay: d,
+        gzYear: gzY,
+        gzMonth: gzM,
+        gzDay: gzD,
+        gzHour: gzH,
+        isToday: isToday,
+        isLeap: isLeap,
+        nWeek: nWeek,
+        ncWeek: "\u661f\u671f" + cWeek,
+        isTerm: isTerm,
+        Term: Term,
+        astro: astro,
+    };
     return DayInfo;
 };
 const lunar2solar = function (y, m, d, isLeapMonth) {
+    //参数区间1900.1.31~2100.12.1
     isLeapMonth = !!isLeapMonth;
     let leapM = leapMonth(y);
-    if (isLeapMonth && (leapM != m)) {
+    if (isLeapMonth && leapM != m) {
         return -1;
     } //传参要求计算该闰月公历 但该年得出的闰月与传参的月份并不同
-    if (y == 2100 && m == 12 && d > 1 || y == 1900 && m == 1 && d < 31) {
+    if ((y == 2100 && m == 12 && d > 1) || (y == 1900 && m == 1 && d < 31)) {
         return -1;
-    } //超出了最大极限值 
+    } //超出了最大极限值
     let day = monthDays(y, m);
     let _day = day;
-    //bugFix 2016-9-25 
-    //if month is leap, _day use leapDays method 
+    //bugFix 2016-9-25
+    //if month is leap, _day use leapDays method
     if (isLeapMonth) {
         _day = leapDays(y);
     }
@@ -742,7 +1208,8 @@ const lunar2solar = function (y, m, d, isLeapMonth) {
     let leap = 0, isAdd = false;
     for (let i = 1; i < m; i++) {
         leap = leapMonth(y);
-        if (!isAdd) { //处理闰月
+        if (!isAdd) {
+            //处理闰月
             if (leap <= i && leap > 0) {
                 offset += leapDays(y);
                 isAdd = true;
@@ -779,7 +1246,7 @@ const calendar = {
     getTerm,
     getAnimal,
     solar2lunar,
-    lunar2solar
+    lunar2solar,
 };
 
 module.exports = calendar;

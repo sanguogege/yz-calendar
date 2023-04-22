@@ -11,16 +11,17 @@
 <body>
     <script src="./dist/index.js"></script>
     <script>
-        var addrest = {
-            "2021": {
-                "xiu": ["0909", "0102", "0103", "0211", "0212", "0213", "0214", "0215", "0216", "0217", "0403", "0404", "0405", "0501", "0502", "0503", "0504", "0505", "0612", "0613", "0614", "0919", "0920", "0921", "1001", "1002", "1003", "1004", "1005", "1006", "1007"],
-                "ban": ["0909", "0220", "0425", "0508", "0918", "0926", "1009"]
-            }
-        }
-        calendar.setRest = addrest
+        var y = 2022, m = 10, d = 4
+        var thisday = calendar.solar2lunar(y, m, d)
         console.log(calendar);
-        console.log(calendar.solar2lunar());
-
+        console.log(thisday);
+        //当月一日与 1900/1/1 相差天数
+        //1900/1/1与 1970/1/1 相差25567日, 1900/1/1 日柱为甲戌日(60进制10)
+        var dayCyclical = Date.UTC(2022, 11, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10 + 14;
+        console.log(dayCyclical);
+        // (y - 1900) * 12 + m + 12 
+        var thisaa = (y - 1900) * 12 + m + 12;
+        console.log(calendar.toGanZhi(thisaa));
     </script>
 </body>
 
