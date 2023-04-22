@@ -11,17 +11,11 @@
 <body>
     <script src="./dist/index.js"></script>
     <script>
-        var y = 2022, m = 10, d = 4
+        var y = 2023, m = 4, d = 23
         var thisday = calendar.solar2lunar(y, m, d)
         console.log(calendar);
         console.log(thisday);
-        //当月一日与 1900/1/1 相差天数
-        //1900/1/1与 1970/1/1 相差25567日, 1900/1/1 日柱为甲戌日(60进制10)
-        var dayCyclical = Date.UTC(2022, 11, 1, 0, 0, 0, 0) / 86400000 + 25567 + 10 + 14;
-        console.log(dayCyclical);
-        // (y - 1900) * 12 + m + 12 
-        var thisaa = (y - 1900) * 12 + m + 12;
-        console.log(calendar.toGanZhi(thisaa));
+
     </script>
 </body>
 

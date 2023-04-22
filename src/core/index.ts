@@ -1,6 +1,2 @@
-import calendar from "../utils/Switch"
-
-
-
-
-export default calendar
+import calendar from "../utils/Switch";
+export default calendar;
