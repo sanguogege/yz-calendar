@@ -20,7 +20,8 @@ import {
 	toChinaNum,
 } from "./SolarFunction";
 
-import { RestDay, getGljr, getNljr } from "./SetRest";
+import { RestDay } from "./SetRest";
+import { FestivalDay } from "./SetFestival";
 
 const solar2lunar = function (y: number, m: number, d: number): object {
 	//未传参获得当天
@@ -142,13 +143,18 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 	//该日期所属的星座
 	let astro: string = toAstro(m, d);
 	// 设置公里节日
-	let Gljr = getGljr(m, d);
-	let Nljr = getNljr(month, day);
-
+	const GAll = FestivalDay(m, d, calendar.setFestival);
+	const NAll = FestivalDay(month, day, calendar.setFestival, false);
+	let Gljr = GAll.FDays;
+	let Nljr = NAll.FDays;
+	calendar.Festival = {
+		sFtv: GAll.Festival,
+		lFtv: NAll.Festival,
+	};
 	let XiuBox = RestDay(y, m, d, calendar.setRest);
 	calendar.Rest = XiuBox.newRest;
 	// 用于设置上个月
-	let DayInfo = {
+	return {
 		Xiu: XiuBox.Xiu,
 		Ban: XiuBox.Ban,
 		Gljr: Gljr,
@@ -173,7 +179,6 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 		Term: Term,
 		astro: astro,
 	};
-	return DayInfo;
 };
 
 const lunar2solar = function (
@@ -237,6 +242,8 @@ const lunar2solar = function (
 const calendar = {
 	setRest: {},
 	Rest: {},
+	setFestival: {},
+	Festival: {},
 	lYearDays,
 	leapMonth,
 	leapDays,

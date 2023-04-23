@@ -38,17 +38,15 @@ const solarFirstWeek = function (y: number, m: number): number {
 
 /**
  * 公历月、日判断所属星座
- * @param  cMonth [description]
- * @param  cDay [description]
+ * @param  m [公历月]
+ * @param  d [公历日]
  * @return Cn string
  */
-const toAstro = function (cMonth: number, cDay: number): string {
+const toAstro = function (m: number, d: number): string {
 	let s: string =
 		"\u9b54\u7faf\u6c34\u74f6\u53cc\u9c7c\u767d\u7f8a\u91d1\u725b\u53cc\u5b50\u5de8\u87f9\u72ee\u5b50\u5904\u5973\u5929\u79e4\u5929\u874e\u5c04\u624b\u9b54\u7faf";
 	let arr: number[] = [20, 19, 21, 21, 21, 22, 23, 23, 23, 23, 22, 22];
-	return (
-		s.substr(cMonth * 2 - (cDay < arr[cMonth - 1] ? 2 : 0), 2) + "\u5ea7"
-	); //座
+	return s.substr(m * 2 - (d < arr[m - 1] ? 2 : 0), 2) + "\u5ea7"; //座
 };
 
 /**

@@ -1,6 +1,8 @@
 declare const calendar: {
     setRest: {};
     Rest: {};
+    setFestival: {};
+    Festival: {};
     lYearDays: (y: number) => number;
     leapMonth: (y: number) => number;
     leapDays: (y: number) => number;
@@ -9,7 +11,7 @@ declare const calendar: {
     toChinaDay: (d: number) => string;
     solarDays: (y: number, m: number) => number;
     solarFirstWeek: (y: number, m: number) => number;
-    toAstro: (cMonth: number, cDay: number) => string;
+    toAstro: (m: number, d: number) => string;
     getAnimal: (y: number) => string;
     solar2lunar: (y: number, m: number, d: number) => object;
     lunar2solar: (y: number, m: number, d: number, isLeapMonth: boolean) => any;

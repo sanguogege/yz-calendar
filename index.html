@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh">
 
 <head>
     <meta charset="UTF-8">
@@ -11,9 +11,23 @@
 <body>
     <script src="./dist/index.js"></script>
     <script>
+        var box = {
+            sFtv: {
+                "0123": ["dsa"]
+            },
+            lFtv: {
+                "0109": ["213"],
+                "0101": ["相同"],
+            }
+        }
         var y = 2023, m = 4, d = 23
+        calendar.setFestival = box
         var thisday = calendar.solar2lunar(y, m, d)
-        console.log(calendar);
+
+
+
+        console.log(calendar.Festival.sFtv);
+        console.log(calendar.Festival.lFtv);
         console.log(thisday);
 
     </script>
