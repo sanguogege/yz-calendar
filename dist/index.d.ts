@@ -4,7 +4,7 @@ declare const calendar: {
     lYearDays: (y: number) => number;
     leapMonth: (y: number) => number;
     leapDays: (y: number) => number;
-    monthDays: (y: number, m: number) => number;
+    lMonthDays: (y: number, m: number) => number;
     toChinaMonth: (m: number) => any;
     toChinaDay: (d: number) => string;
     solarDays: (y: number, m: number) => number;

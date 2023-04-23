@@ -3,6 +3,7 @@ import {
 	Gan,
 	Zhi,
 	GanZhiHour,
+	SolarTerm,
 	nStr3,
 	nStr2,
 	nStr1,
@@ -51,9 +52,9 @@ const leapDays = function (y: number): number {
  * 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
  * @param lunar Year
  * @return Number (-1、29、30)
- * @eg:var MonthDay = calendar.monthDays(1987,9) ;//MonthDay=29
+ * @eg:var MonthDay = calendar.lMonthDays(1987,9) ;//MonthDay=29
  */
-const monthDays = function (y: number, m: number): number {
+const lMonthDays = function (y: number, m: number): number {
 	if (m > 12 || m < 1) {
 		return -1;
 	} //月份参数从1至12，参数错误返回-1
@@ -135,14 +136,25 @@ const toChinaDay = function (d: number): string {
 	return s;
 };
 
+/**
+ * 获取24节气的方法
+ * @param number
+ * @return Cn string
+ * @eg:
+ */
+const getSolarTerm = (n: number) => {
+	return SolarTerm[n];
+};
+
 export {
 	lYearDays,
 	leapMonth,
 	leapDays,
-	monthDays,
+	lMonthDays,
 	toGanZhiYear,
 	toGanZhi,
 	toHourGanZhi,
 	toChinaMonth,
 	toChinaDay,
+	getSolarTerm,
 };

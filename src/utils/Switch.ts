@@ -2,12 +2,13 @@ import {
 	lYearDays,
 	leapMonth,
 	leapDays,
-	monthDays,
+	lMonthDays,
 	toGanZhiYear,
 	toGanZhi,
 	toHourGanZhi,
 	toChinaMonth,
 	toChinaDay,
+	getSolarTerm,
 } from "./LunarFunction";
 
 import {
@@ -16,11 +17,10 @@ import {
 	getAnimal,
 	solarDays,
 	solarFirstWeek,
+	toChinaNum,
 } from "./SolarFunction";
 
 import { RestDay, getGljr, getNljr } from "./SetRest";
-
-import { nStr1, SolarTerm } from "../data/Calendar";
 
 const solar2lunar = function (y: number, m: number, d: number): object {
 	//未传参获得当天
@@ -66,7 +66,7 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 	}
 	//星期几
 	var nWeek: number = objDate.getDay(),
-		cWeek: string = nStr1[nWeek];
+		cWeek: string = toChinaNum(nWeek);
 	//数字表示周几顺应天朝周一开始的惯例
 	if (nWeek == 0) {
 		nWeek = 7;
@@ -84,7 +84,7 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 			isLeap = true;
 			temp = leapDays(year); //计算农历闰月天数
 		} else {
-			temp = monthDays(year, i); //计算农历普通月天数
+			temp = lMonthDays(year, i); //计算农历普通月天数
 		}
 		//解除闰月
 		if (isLeap == true && i == leap + 1) {
@@ -114,7 +114,6 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 	let gzY: string = toGanZhiYear(year);
 
 	// 当月的两个节气
-	// bugfix-2017-7-24 11:03:38 use lunar Year Param `y` Not `year`
 	let firstNode: number = getTerm(y, m * 2 - 1); //返回当月「节」为几日开始
 	let secondNode: number = getTerm(y, m * 2); //返回当月「节」为几日开始
 
@@ -124,16 +123,13 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 		gzM = toGanZhi((y - 1900) * 12 + m + 12);
 	}
 
-	//传入的日期的节气与否
-	let isTerm: boolean = false;
+	//传入的日期的节气与否,有则值，没有则为null
 	let Term: any = null;
 	if (firstNode == d) {
-		isTerm = true;
-		Term = SolarTerm[m * 2 - 2];
+		Term = getSolarTerm(m * 2 - 2);
 	}
 	if (secondNode == d) {
-		isTerm = true;
-		Term = SolarTerm[m * 2 - 1];
+		Term = getSolarTerm(m * 2 - 1);
 	}
 	//日柱 当月一日与 1900/1/1 相差天数
 	let dayCyclical: number =
@@ -161,8 +157,8 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 		lMonth: month,
 		lDay: day,
 		Animal: getAnimal(year),
-		IMonthCn: (isLeap ? "\u95f0" : "") + toChinaMonth(month),
-		IDayCn: toChinaDay(day),
+		LMonthCn: (isLeap ? "\u95f0" : "") + toChinaMonth(month),
+		LDayCn: toChinaDay(day),
 		cYear: y,
 		cMonth: m,
 		cDay: d,
@@ -174,7 +170,6 @@ const solar2lunar = function (y: number, m: number, d: number): object {
 		isLeap: isLeap,
 		nWeek: nWeek,
 		ncWeek: "\u661f\u671f" + cWeek,
-		isTerm: isTerm,
 		Term: Term,
 		astro: astro,
 	};
@@ -196,7 +191,7 @@ const lunar2solar = function (
 	if ((y == 2100 && m == 12 && d > 1) || (y == 1900 && m == 1 && d < 31)) {
 		return -1;
 	} //超出了最大极限值
-	let day: number = monthDays(y, m);
+	let day: number = lMonthDays(y, m);
 	let _day: number = day;
 	//bugFix 2016-9-25
 	//if month is leap, _day use leapDays method
@@ -223,7 +218,7 @@ const lunar2solar = function (
 				isAdd = true;
 			}
 		}
-		offset += monthDays(y, i);
+		offset += lMonthDays(y, i);
 	}
 	//转换闰月农历 需补充该年闰月的前一个月的时差
 	if (isLeapMonth) {
@@ -245,7 +240,7 @@ const calendar = {
 	lYearDays,
 	leapMonth,
 	leapDays,
-	monthDays,
+	lMonthDays,
 	toChinaMonth,
 	toChinaDay,
 	solarDays,

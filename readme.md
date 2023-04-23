@@ -70,7 +70,7 @@ const today  =  calendar.solar2lunar(2021, 3, 21)
     - 返回农历y年闰月是哪个月；若y年没有闰月 则返回0
 - leapDays (y: number)
     - 返回农历y年闰月的天数 若该年没有闰月则返回0
-- monthDays(y: number, m: number)
+- lMonthDays(y: number, m: number)
     - 返回农历y年m月（非闰月）的总天数，计算m为闰月时的天数请使用leapDays方法
 - toChinaMonth (m: number)
     - 传入农历数字月份返回汉语通俗表示法
