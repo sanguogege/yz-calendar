@@ -1,11 +1,10 @@
 {
     "name": "yz-calendar",
-    "version": "1.4.0",
+    "version": "1.5.2",
     "description": "ts版本的日历生成器 LTS",
-    "main": "dits/index.cjs.js",
-    "module": "dist/index.esm.js",
-    "browser": "dist/index.js",
-    "types": "/dist/index.d.ts",
+    "main": "./dist/index.js",
+    "module": "./dist/index.esm.js",
+    "types": "./dist/types/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup -c"

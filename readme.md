@@ -1,52 +1,27 @@
-# 使用rollup打包，修改了一些功能。
+<p align="center"> <b>万年历生成器</b> </p>
 
-
-#### 添加了关于每日是否是休息和调班日，添加的数据接口。
-calendar.setRest
-
-如果不喜欢，可以源码修改。
-构建项目中去dist/index.esm.js修改Rest 。
-网页引入去dist/index.js修改Rest
-
-## web构建工具使用:
+### web构建工具使用:
 `npm i yz-calendar`
 
 ```
 import calendar from "yz-calendar";
-
-var addrest = {
-            "2021": {
-                "xiu": ["0909", "0102", "0103", "0211", "0212", "0213", "0214", "0215", "0216", "0217", "0403", "0404", "0405", "0501", "0502", "0503", "0504", "0505", "0612", "0613", "0614", "0919", "0920", "0921", "1001", "1002", "1003", "1004", "1005", "1006", "1007"],
-                "ban": ["0909", "0220", "0425", "0508", "0918", "0926", "1009"]
-            }
-        }
-
-calendar.setRest = addrest
 
 const today  =  calendar.solar2lunar(2021, 3, 21)
 
 ```
 
 
-## 普通页面直接复制/dist.index.js
+### 传统页面直接复制/dist/index.js
 
 ```
 <script src="./dist/index.js"></script>
 <script>
-    var addrest = {
-            "2021": {
-                "xiu": ["0909", "0102", "0103", "0211", "0212", "0213", "0214", "0215", "0216", "0217", "0403", "0404", "0405", "0501", "0502", "0503", "0504", "0505", "0612", "0613", "0614", "0919", "0920", "0921", "1001", "1002", "1003", "1004", "1005", "1006", "1007"],
-                "ban": ["0909", "0220", "0425", "0508", "0918", "0926", "1009"]
-            }
-        }
-    calendar.setRest = addrest
-    console.log(calendar.Rest);
-    console.log(calendar.solar2lunar());
+    const today  =  calendar.solar2lunar(2021, 3, 21)
 </script>
 
  ```
 
-### calendar 所有的属性方法。
+### calendar 所有的方法。
 
 ##### 这两个是最主要的方法，常用的，还有一个自定义休息与调休日
 
@@ -55,14 +30,31 @@ const today  =  calendar.solar2lunar(2021, 3, 21)
 - lunar2sola(y: number, m: number, d: number, isLeapMonth: boolean)
     - 传入农历年月日以及传入的月份是否闰月获得详细的公历、农历object信息
 
-- setRest= {} 
-    - 赋值设置休息日与调休日
+
+- Rest 查看当前的休息日与调休日，若没有添加则是插件自带。
+
+- setRest= { } 
+    - 设置休息日与调休日
     - 格式为: ` {
         2023:{
             xiu:['0101'],
             ban:['0202,0203'] 
         } 
     }`
+
+- Festival 查看当前的节日信息，若没有添加则是插件自带。
+
+- setFestival= { } 
+    - 设置农历、公历节日信息，sFtv为公历，lFtv为农历
+    - 格式为: `  {
+            sFtv: {
+                "0123": ["节日名称"]
+            },
+            lFtv: {
+                "0109": ["节日名称"]
+            }
+        }`
+
 
 - lYearDays (y: number) 
     - 返回农历y年一整年的总天数
