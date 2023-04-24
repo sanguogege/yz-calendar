@@ -2,9 +2,6 @@
     "name": "yz-calendar",
     "version": "1.5.2",
     "description": "ts版本的日历生成器 LTS",
-    "main": "./dist/index.js",
-    "module": "./dist/index.esm.js",
-    "types": "./dist/types/index.d.ts",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "build": "rollup -c"
@@ -22,7 +19,7 @@
     "license": "ISC",
     "devDependencies": {
         "@rollup/plugin-json": "^6.0.0",
-        "rollup": "^3.20.0",
+        "rollup": "^3.21.0",
         "rollup-plugin-dts": "^5.3.0",
         "rollup-plugin-typescript2": "^0.34.1",
         "typescript": "^5.0.2"
